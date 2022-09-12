@@ -1,19 +1,34 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { getCount, increaseCount } from "../features/posts/postsSlice"
 
-import React from 'react'
+import React from "react"
 
 const Header = () => {
-  return (
-    <header classname="Header">
-        <h1>Redux Blog</h1>
-        <nav>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="post">Post</Link></li>
-            </ul>
-        </nav>
-    </header>
-  )
+    const dispatch = useDispatch()
+    const count = useSelector(getCount)
+
+    return (
+        <header classname="Header">
+            <h1>Redux Blog</h1>
+            <nav>
+                <ul>
+                    <li>
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link to="post">Post</Link>
+                    </li>
+                    <li>
+                        <Link to="user">Users</Link>
+                    </li>
+                </ul>
+                <button onClick={() => dispatch(increaseCount())}>
+                    {count}
+                </button>
+            </nav>
+        </header>
+    )
 }
 
 export default Header
